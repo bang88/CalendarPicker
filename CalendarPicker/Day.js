@@ -19,6 +19,8 @@ export default function Day(props) {
     textStyle,
     minDate,
     maxDate,
+    markedDay,
+    markedStyle,
   } = props;
 
   const thisDay = new Date(year, month, day);
@@ -110,7 +112,7 @@ export default function Day(props) {
       <TouchableOpacity
         style={[styles.dayButton, daySelectedStyle]}
         onPress={() => onPressDay(day) }>
-        <Text style={[styles.dayLabel, textStyle, selectedDayColorStyle]}>
+        <Text style={[styles.dayLabel, textStyle, selectedDayColorStyle, markedDay ? markedStyle : {}]}>
           { day }
         </Text>
       </TouchableOpacity>

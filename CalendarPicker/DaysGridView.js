@@ -21,6 +21,8 @@ export default function DaysGridView(props) {
     textStyle,
     minDate,
     maxDate,
+    marked = [],
+    markedStyle,
   } = props;
   const today = new Date();
   // let's get the total of days in this month, we need the year as well, since
@@ -42,10 +44,13 @@ export default function DaysGridView(props) {
         if (index >= firstWeekDay) {
           if (days.length > 0) {
             const day= days.shift() + 1;
+            const markedDay = marked.indexOf(day) !== -1
             return (
               <Day
                 key={day}
                 day={day}
+                markedDay={markedDay}
+                markedStyle={markedStyle}
                 month={month}
                 year={year}
                 styles={styles}
@@ -70,10 +75,13 @@ export default function DaysGridView(props) {
       } else {
         if (days.length > 0) {
           const day= days.shift() + 1;
+          const markedDay = marked.indexOf(day) !== -1
           return (
             <Day
               key={day}
               day={day}
+              markedDay={markedDay}
+              markedStyle={markedStyle}
               month={month}
               year={year}
               styles={styles}

@@ -172,6 +172,8 @@ export default class CalendarPicker extends Component {
       previousTitle,
       nextTitle,
       textStyle,
+      marked = [],
+      markedStyle,
     } = this.props;
 
     return (
@@ -210,6 +212,8 @@ export default class CalendarPicker extends Component {
             minDate={minDate && minDate.setHours(0,0,0,0)}
             maxDate={maxDate && maxDate.setHours(0,0,0,0)}
             textStyle={textStyle}
+            marked={marked}
+            markedStyle={markedStyle}
           />
         </View>
       </Swiper>
