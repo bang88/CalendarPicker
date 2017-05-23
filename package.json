@@ -1,6 +1,6 @@
 {
   "name": "hake-react-native-calendar",
-  "version": "5.8.4",
+  "version": "5.8.5",
   "description": "Calendar Picker Component for React Native",
   "dependencies": {
     "uuid": "^3.0.1"

@@ -109,47 +109,47 @@ export default class CalendarPicker extends Component {
 
   handleOnPressPrevious() {
     const { currentMonth, currentYear } = this.state;
-    this.onMonthChange({ month: currentMonth, year: currentYear })
+    
+    let previousMonth = currentMonth - 1;
+    let previousYear = currentYear;
 
-    const previousMonth = currentMonth - 1;
     // if previousMonth is negative it means the current month is January,
     // so we have to go back to previous year and set the current month to December
     if (previousMonth < 0) {
-      this.setState({
-        currentMonth: parseInt(11), // setting month to December
-        currentYear: parseInt(currentYear) - 1 // decrement year
-      });
-    } else {
-      this.setState({
-        currentMonth: parseInt(previousMonth),
-        currentYear: parseInt(currentYear)
-      });
-    }
+      previousMonth = parseInt(11), // setting month to December
+      previousYear = parseInt(currentYear) - 1 // decrement year
+    } 
+     this.setState({
+        currentMonth: previousMonth, // setting month to December
+        currentYear: previousYear // decrement year
+      },()=>{
+          this.onMonthChange()
+      })
   }
 
   handleOnPressNext() {
     const { currentMonth, currentYear } = this.state;
-    this.onMonthChange({ month: currentMonth, year: currentYear })
 
-    const nextMonth = currentMonth + 1;
+    let nextMonth = currentMonth + 1;
+    let nextYear = currentYear;
     // if nextMonth is greater than 11 it means the current month is December,
     // so we have to go forward to the next year and set the current month to January
     if (nextMonth > 11) {
-      this.setState({
-        currentMonth: parseInt(0), // setting month to January
-        currentYear: parseInt(currentYear) + 1 // increment year
-      });
-    } else {
-      this.setState({
-        currentMonth: parseInt(nextMonth),
-        currentYear: parseInt(currentYear)
-      });
-    }
+      nextMonth = 0
+      nextYear = parseInt(currentYear) + 1
+    } 
+    this.setState({
+        currentMonth: nextMonth,
+        currentYear: nextYear
+    },()=>{
+          this.onMonthChange()
+    })
   }
-  onMonthChange(data) {
+  onMonthChange() {
     const { onMonthChange } = this.props;
     if (typeof onMonthChange === "function") {
-      onMonthChange(data);
+      const { currentMonth, currentYear } = this.state;
+      onMonthChange({ month: currentMonth + 1, year: currentYear });
     }
   }
   onSwipe(gestureName) {
